@@ -9,7 +9,7 @@ Minimum 2POL
 
 Create Rpc polygon Endpoint : https://www.alchemy.com/
 
-Source Script :https://github.com/Svz1404/Tea-FI/
+
 
 How to run :
 
