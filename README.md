@@ -1,11 +1,11 @@
 # Tea-FI
-Full tutorial On my channel https://t.me/NTExhaust
+
 
 Tea-Fi Auto Swap
 
 Minimum 2POL
 
-Tutorial on video : https://www.youtube.com/watch?v=-G1eUpGn0VM
+
 
 Create Rpc polygon Endpoint : https://www.alchemy.com/
 
