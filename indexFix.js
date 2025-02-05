@@ -28,7 +28,12 @@ async function main() {
     const HEADERS = {
       "Accept": "application/json, text/plain, */*",
       "Content-Type": "application/json",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+      "Origin": "https://app.tea-fi.com", // Spoofing Origin to match allowed
+      "Referer": "https://app.tea-fi.com/",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
     };
 
     if (!privateKey || !rpcUrl || !API_URL) {
@@ -80,9 +85,9 @@ async function main() {
             walletAddress: wallet.address,
             hash: txResponse.hash,
             fromTokenAddress: "0x0000000000000000000000000000000000000000",
-            toTokenAddress: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
-            fromTokenSymbol: "POL",
-            toTokenSymbol: "WPOL",
+            toTokenAddress: "0x1Cd0cd01c8C902AdAb3430ae04b9ea32CB309CF1",
+            fromTokenSymbol: "WPOL",
+            toTokenSymbol: "tPOL",
             fromAmount: "150000000000000",
             toAmount: "150000000000000",
             gasFeeTokenAddress: "0x0000000000000000000000000000000000000000",
