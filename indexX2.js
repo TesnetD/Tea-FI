@@ -87,14 +87,14 @@ async function main() {
           console.log("✅ Transaction sent! Hash:", txResponse.hash);
 
           const receipt = await txResponse.wait();
-          console.log("✅ WMATIC wrapped successfully! Transaction Hash:", receipt.transactionHash);
+          console.log("✅ WMATIC wrapped successfully! Transaction Hash:", txResponse.hash);
 
           // Prepare API payload
           const payload = {
             blockchainId: 137,
             type: 2,
             walletAddress: wallet.address,
-            hash: receipt.transactionHash,
+            hash: txResponse.hash,
             fromTokenAddress: "0x0000000000000000000000000000000000000000",
             toTokenAddress: "0x1Cd0cd01c8C902AdAb3430ae04b9ea32CB309CF1",
             fromTokenSymbol: "WPOL",
