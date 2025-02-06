@@ -14,7 +14,7 @@ Create Rpc polygon Endpoint : https://www.alchemy.com/
 How to run :
 
 ```
-git clone https://github.com/Svz1404/Tea-FI/
+git clone https://github.com/TesnetD/Tea-FI.git
 ```
 
 
