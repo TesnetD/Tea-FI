@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import { ethers } from "ethers";
 import fetch from "node-fetch";
 import cfonts from "cfonts";
-import chalk from'chalk';
+import chalk from 'chalk';
+
 // Load environment variables
 dotenv.config();
 
@@ -11,8 +12,8 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main() {
   try {
-    cfonts.say('NT Exhaust', {
-      font: 'block',        // Options: 'block', 'simple', '3d', etc.
+    cfonts.say('END AIRDROP', {
+      font: 'block',       
       align: 'center',
       colors: ['cyan', 'magenta'],
       background: 'black',
@@ -21,14 +22,21 @@ async function main() {
       space: true,
       maxLength: '0',
     });
-  console.log(chalk.green("=== Telegram Channel : NT Exhaust ( @NTExhaust ) ==="))
+
+    console.log(chalk.green("=== Telegram Channel : END Airdrop ( @ENDAirdrop ) ==="));
+
     const privateKey = process.env.PRIVATE_KEY;
     const rpcUrl = process.env.RPC_URL;
     const API_URL = process.env.API_URL;
     const HEADERS = {
       "Accept": "application/json, text/plain, */*",
       "Content-Type": "application/json",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+      "Origin": "https://app.tea-fi.com",
+      "Referer": "https://app.tea-fi.com/",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
     };
 
     if (!privateKey || !rpcUrl || !API_URL) {
@@ -64,9 +72,14 @@ async function main() {
 
       while (retry) {
         try {
-          // Wrap MATIC to WMATIC
+          // Wrap MATIC to WMATIC with custom gas settings
           console.log("Wrapping MATIC to WMATIC...");
-          const txResponse = await wmaticContract.deposit({ value: amountToWrap });
+          const txResponse = await wmaticContract.deposit({
+            value: amountToWrap,
+            gasPrice: ethers.parseUnits('50', 'gwei'), // FIXED: Sesuaikan gas price
+            gasLimit: 500000 // Sesuaikan gas limit
+          });
+          
           console.log("✅ Transaction sent! Hash:", txResponse.hash);
 
           const receipt = await txResponse.wait();
@@ -80,9 +93,9 @@ async function main() {
             walletAddress: wallet.address,
             hash: txResponse.hash,
             fromTokenAddress: "0x0000000000000000000000000000000000000000",
-            toTokenAddress: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
-            fromTokenSymbol: "POL",
-            toTokenSymbol: "WPOL",
+            toTokenAddress: "0x1Cd0cd01c8C902AdAb3430ae04b9ea32CB309CF1",
+            fromTokenSymbol: "WPOL",
+            toTokenSymbol: "tPOL",
             fromAmount: "150000000000000",
             toAmount: "150000000000000",
             gasFeeTokenAddress: "0x0000000000000000000000000000000000000000",
@@ -112,16 +125,15 @@ async function main() {
 
           // Check for rate limit error
           if (error.message.includes("Too many requests")) {
-            console.log("⏳ Rate limit hit. Retrying in 1 minutes...");
-            await delay(60000); // Wait for 10 minutes
+            console.log("⏳ Rate limit hit. Retrying in 1 minute...");
+            await delay(60000); // Wait for 1 minute
           } else {
             retry = false; // Stop retrying for other errors
           }
         }
       }
 
-      console.log("🕐 Waiting 1 minute before next transaction...");
-      await delay(2000); // Delay 60 seconds between each loop
+      await delay(2000); // Delay 2 seconds between each loop
     }
 
   } catch (error) {
@@ -130,4 +142,3 @@ async function main() {
 }
 
 main();
-
