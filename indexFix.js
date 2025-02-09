@@ -23,7 +23,7 @@ async function main() {
       maxLength: '0',
     });
 
-    console.log(chalk.green("=== Telegram Channel : END Airdrop ( @ENDAirdrop ) ==="));
+    console.log(chalk.green("=== Telegram Channel : END Airdrop ( https://t.me/endingdrop ) ==="));
 
     const privateKey = process.env.PRIVATE_KEY;
     const rpcUrl = process.env.RPC_URL;
